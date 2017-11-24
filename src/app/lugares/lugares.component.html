@@ -5,14 +5,14 @@
 <div class="container">
 <ul class="list-group">
   <ng-container *ngFor="let lugar of lugares">
-      <li class="list-group-item" *ngIf="lugar.active"> {{lugar.nombre}}</li>
+      <a routerLink="/detalle/{{lugar.id}}" [queryParams]="{action:'view'}"><li class="list-group-item" *ngIf="lugar.active"> {{lugar.nombre}}</li></a>
   </ng-container>
 </ul>
 </div>
 
 <!-- Este Listado de Items es solo para mantener los ejemplos,
 no forma parte de la app -->
-<div class="container">
+<!-- <div class="container">
 <div class="segundo-container">
  <ul class="list-group">
   <ng-container *ngFor="let lugar of lugares; let i = x" [ngSwitch]="lugar.cercania">
@@ -25,4 +25,7 @@ no forma parte de la app -->
   </ng-container>
  </ul>
 </div>
-</div>
+</div> -->
+
+
+<!--QueryParam, enviamos paramentos de tipo query  -->
