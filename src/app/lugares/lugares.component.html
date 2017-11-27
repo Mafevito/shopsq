@@ -2,6 +2,8 @@
   <agm-marker *ngFor="let lugar of lugares" [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
 </agm-map>
 
+<div id="cuadrado"></div>
+<a class="btn btn-default" (click)="animar()">Animar</a>
 <div class="container">
   <div class="row">
     <div class="col-md-8">
@@ -13,11 +15,20 @@
               <a routerLink="/crear/{{lugar.id}}" [queryParams]="{action:'view'}"> <h4>{{lugar.nombre}}</h4> </a>
             <br />
             <small> Creado: {{lugar.id | date:'medium' | uppercase}}</small> <br />
-            <p>{{lugar.descripcion}}</p>
+            <!-- Pipe de detección de rutas linkify -->
+            <p [innerHtml]="lugar.descripcion | linkifystr"></p>
             </li>
         </ng-container>
       </ul>
     </div>
+    <div class="col-md-4">
+      <h2>Destacados</h2>
+      <ng-container *ngFor="let lugar of lugares">
+          <div class="bg-danger padding" *ngIf="lugar.plan === 'pagado'">
+            <a routerLink="/crear/{{lugar.id}}" [queryParams]="{action:'view'}"> <h4>{{lugar.nombre}}</h4> </a>
+            <p [innerHtml]="lugar.descripcion | linkifystr"></p>
+        </div>
+      </ng-container>
   </div>
 </div>
 

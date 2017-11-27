@@ -2,3 +2,14 @@
 agm-map {
   height: 300px;
 }
+
+
+#cuadrado {
+  width: 200px;
+  height: 200px;
+  background-color: #fff000;
+}
+
+.padding {
+  padding: 10px 0 10px;
+}

@@ -18,6 +18,10 @@
         <a class="nav-link" routerLink="/contacto">Contacto</a>
       </li>
     </ul>
+    <ul class="nav navbar-nav navbar-right" *ngIf="!loggedIn">
+      <li><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/registro">Registrarme</a></li>
+    </ul>
   </div>
 </nav>
 </div>
