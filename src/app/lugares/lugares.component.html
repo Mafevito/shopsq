@@ -1,13 +1,24 @@
 <agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  <agm-marker *ngFor="let lugar of lugares" [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
 </agm-map>
 
 <div class="container">
-<ul class="list-group">
-  <ng-container *ngFor="let lugar of lugares">
-      <a routerLink="/detalle/{{lugar.id}}" [queryParams]="{action:'view'}"><li class="list-group-item" *ngIf="lugar.active"> {{lugar.nombre}}</li></a>
-  </ng-container>
-</ul>
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Lugares cercanos</h2>
+      <a class="btn btn-primary" routerLink="/crear/new">Crear nuego Negocio</a>
+      <ul class="list-group">
+        <ng-container *ngFor="let lugar of lugares">
+          <a routerLink="/crear/{{lugar.id}}" [queryParams]="{action:'view'}">
+            <li class="list-group-item"> {{lugar.nombre}} <br />
+            <small> Creado: {{lugar.id | date:'medium' | uppercase}}</small> <br />
+            {{'123.456' | number: '1.2-2'}}
+            </li>
+          </a>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <!-- Este Listado de Items es solo para mantener los ejemplos,
