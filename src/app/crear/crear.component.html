@@ -16,6 +16,16 @@
   <textarea class="form-control" [(ngModel)]="lugar.description"></textarea><br/>
 
   <h3>Datos de dirección</h3>
+  <!-- Obteniendo los sitios desde la api de google -->
+  <div class="card card-body bg-light">
+    <form>
+      <label>Buscar direccion en googl maps</label>
+      <input type="text" class="form-control" [formControl]="searchField"/>
+    </form>
+    <ul class="list-group">
+      <li class="list-group-item" *ngForm="let result of results$ | async">result.formatted.address</li>
+    </ul>
+  </div>
 
   <label>Calle y Número</label>
   <input type="text" class="form-control" [(ngModel)]="lugar.calle" /><br/>

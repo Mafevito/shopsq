@@ -5,7 +5,7 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService{
-  constructor(private angularFireAuth: AngularFireAuth) {
+  constructor(private angularFireAuth: AngularFireAuth, private router: Router) {
     this.isLogged();
   }
   public facebookLogin(){
@@ -24,6 +24,7 @@ export class AuthService{
          .then((response) => {
            alert('Usuario login con exito');
            console.log(response);
+           this.router.navigate(['lugares']);
          })
          .catch((error) => {
            alert('Hubo un error');
@@ -36,6 +37,7 @@ export class AuthService{
          .then((response) => {
            alert('Usuario registado con exito');
            console.log(response);
+           this.router.navigate(['lugares']);
          })
          .catch((error) => {
            alert('Hubo un error');
@@ -45,5 +47,15 @@ export class AuthService{
     // Va a a estar verifcando si el user esta logueado
     public isLogged() {
       return this.angularFireAuth.authState;
+    };
+
+    public logout(){
+      this.angularFireAuth.auth.signOut();
+      alert('Sesion cerrada');
+      this.router.navigate(['lugares']);
+    }
+
+    public getUser() {
+      return this.angularFireAuth.auth;
     }
 }
