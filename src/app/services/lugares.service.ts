@@ -30,10 +30,10 @@ constructor(private afDB:AngularFireDatabase, private http: Http){}
   }
 
   public guardarLugar(lugar){
-      // this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
-      const headers = new Headers({"Content-Type": "application/json"});
+      this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
+      // const headers = new Headers({"Content-Type": "application/json"});
       // Enviando datos tipo POST
-      return this.http.post(this.API_ENDPOINT+'/lugares.json', lugar, {headers:headers});
+      // return this.http.post(this.API_ENDPOINT+'/lugares.json', lugar, {headers:headers});
   }
 
   public editarLugar(lugar){

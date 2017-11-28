@@ -47,7 +47,7 @@ export class AuthService{
     // Va a a estar verifcando si el user esta logueado
     public isLogged() {
       return this.angularFireAuth.authState;
-    };
+    }
 
     public logout(){
       this.angularFireAuth.auth.signOut();

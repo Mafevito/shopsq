@@ -14,29 +14,35 @@ import { Http } from '@angular/http';
 export class CrearComponent {
   lugar: any = {};
   id:any = null;
-  // Coleccion de observables
+  // string de observables
   results$: Observable<any>;
   private searchField: FormControl;
 
   constructor(private lugaresService: LugaresService, private route: ActivatedRoute, private http: Http){
       // Obteniendo el id del negocio
       this.id = this.route.snapshot.params['id'];
-      console.log(this.id);
       if(this.id != 'new') {
         this.lugaresService.getLugar(this.id)
-              .valueChanges().subscribe(lugar => {
+              .valueChanges().subscribe((lugar) => {
                 this.lugar = lugar;
             });
       }
+      // Agregando la busqueda de sitios google maps api
       const URL = 'https://maps.google.com/maps/api/geocode/json';
       this.searchField = new FormControl();
       this.results$ = this.searchField.valueChanges
         .debounceTime(500)
-        .switchMap(query => this.http.get(`${URL}?addres=${query}`))
+        .switchMap(query => this.http.get(`${URL}?address=${query}`))
         .map(response => response.json())
         .map(response => response.results);
   }
 // Map se usa para formatear la respuesta
+  seleccionarDireccion(direccion) {
+    console.log(direccion);
+    this.lugar.calle = direccion.address_components[1].long_name + '' + direccion.address_components[0].long_name;
+    this.lugar.ciudad = direccion.address_components[4].long_name;
+    this.lugar.pais = direccion.address_components[6].long_name;
+  }
 
   guardarLugar(){
     // Obtener lugares desde maps

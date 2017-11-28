@@ -1,5 +1,5 @@
 <div class="card card-body bg-light">
-  <a routerLink="/lugares">Lugares</a> / Crear lugar
+  <a routerLink="/lugares">Lugares</a> / Crear nuevo lugar
 </div>
 
 <div class="container">
@@ -19,11 +19,11 @@
   <!-- Obteniendo los sitios desde la api de google -->
   <div class="card card-body bg-light">
     <form>
-      <label>Buscar direccion en googl maps</label>
-      <input type="text" class="form-control" [formControl]="searchField"/>
+        <label>Buscar direccion en google maps</label>
+        <input type="text" class="form-control" [formControl]="searchField"/>
     </form>
     <ul class="list-group">
-      <li class="list-group-item" *ngForm="let result of results$ | async">result.formatted.address</li>
+      <li class="list-group-item" *ngFor="let result of results$ | async" (click)="seleccionarDireccion(result)">{{result.formatted_address}}</li>
     </ul>
   </div>
 
@@ -37,5 +37,5 @@
   <input type="text" class="form-control" [(ngModel)]="lugar.pais" /><br/>
 
   <a class="btn btn-primary" (click)="guardarLugar()">Enviar</a>
-  <a class="btn btn-default" routerLink="/lugares">Cancelar</a>
+  <a class="btn btn-danger" routerLink="/lugares">Cancelar</a>
 </div>
